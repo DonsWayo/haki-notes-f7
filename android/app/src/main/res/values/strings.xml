@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">HakiNotes</string>
+    <string name="title_activity_main">HakiNotes</string>
+    <string name="package_name">com.juanjosecarracedo.hakinotes</string>
+    <string name="custom_url_scheme">com.juanjosecarracedo.hakinotes</string>
+</resources>

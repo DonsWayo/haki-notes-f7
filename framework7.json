@@ -1,0 +1,33 @@
+{
+  "cwd": "/Users/donswayo/Desktop/haki-notes-f7",
+  "type": [
+    "capacitor"
+  ],
+  "name": "HakiNotes",
+  "framework": "react",
+  "template": "split-view",
+  "bundler": "webpack",
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": true,
+    "color": "#008080",
+    "darkTheme": false,
+    "iconFonts": true,
+    "fillBars": false
+  },
+  "customBuild": false,
+  "webpack": {
+    "developmentSourceMap": true,
+    "productionSourceMap": true,
+    "hashAssets": false,
+    "preserveAssetsPaths": false,
+    "inlineAssets": true
+  },
+  "pkg": "com.juanjosecarracedo.hakinotes",
+  "capacitor": {
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  }
+}

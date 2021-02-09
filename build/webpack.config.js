@@ -22,7 +22,7 @@ module.exports = {
   mode: env,
   target: env === "development" ? "web" : "browserslist",
   entry: {
-    app: './src/js/app.js',
+    app: './src/js/app.tsx',
   },
   output: {
     path: resolvePath('www'),
@@ -33,7 +33,7 @@ module.exports = {
     hotUpdateMainFilename: 'hot/hot-update.json',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx','.js', '.jsx', '.json'],
     alias: {
       '@': resolvePath('src'),
     },
@@ -55,7 +55,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(mjs|js|jsx)$/,
+        test: /\.(mjs|js|jsx|ts|tsx)$/,
         include: [
           resolvePath('src'),
 

@@ -1,15 +1,15 @@
 
-import HomePage from '../pages/home.jsx';
-import AboutPage from '../pages/about.jsx';
-import FormPage from '../pages/form.jsx';
+import HomePage from '../pages/home';
+import AboutPage from '../pages/about';
+import FormPage from '../pages/form';
 
-import LeftPage1 from '../pages/left-page-1.jsx';
-import LeftPage2 from '../pages/left-page-2.jsx';
-import DynamicRoutePage from '../pages/dynamic-route.jsx';
-import RequestAndLoad from '../pages/request-and-load.jsx';
-import NotFoundPage from '../pages/404.jsx';
+import LeftPage1 from '../pages/left-page-1';
+import LeftPage2 from '../pages/left-page-2';
+import DynamicRoutePage from '../pages/dynamic-route';
+import RequestAndLoad from '../pages/request-and-load';
+import NotFoundPage from '../pages/404';
 
-var routes = [
+const routes = [
   {
     path: '/',
     component: HomePage,
@@ -37,20 +37,20 @@ var routes = [
   },
   {
     path: '/request-and-load/user/:userId/',
-    async: function ({ router, to, resolve }) {
+    async: ({ router, to, resolve }) => {
       // App instance
-      var app = router.app;
+      const app = router.app;
 
       // Show Preloader
       app.preloader.show();
 
       // User ID from request
-      var userId = to.params.userId;
+      const userId = to.params.userId;
 
       // Simulate Ajax Request
-      setTimeout(function () {
+      setTimeout(() => {
         // We got user data from request
-        var user = {
+        const user = {
           firstName: 'Vladimir',
           lastName: 'Kharlampidi',
           about: 'Hello, i am creator of Framework7! Hope you like it!',

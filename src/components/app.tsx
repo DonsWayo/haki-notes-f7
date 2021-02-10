@@ -21,7 +21,9 @@ import {
   ListItem,
   ListInput,
   ListButton,
-  BlockFooter
+  BlockFooter,
+  Icon,
+  Button
 } from 'framework7-react';
 
 import capacitorApp from '../js/capacitor-app';
@@ -37,7 +39,7 @@ const MyApp = () => {
   const f7params = {
     name: 'HakiNotes', // App name
       theme: 'auto', // Automatic theme detection
-
+      autoDarkTheme: true,
 
       id: 'com.juanjosecarracedo.hakinotes', // App bundle ID
       // App store
@@ -74,13 +76,20 @@ const MyApp = () => {
     <App { ...f7params } >
 
         {/* Left panel with cover effect when hidden */}
-        <Panel left cover themeDark visibleBreakpoint={960}>
+        <Panel left cover visibleBreakpoint={660}>
           <View>
             <Page>
-              <Navbar title="Left Panel"/>
-              <BlockTitle>Left View Navigation</BlockTitle>
+            <div style={{padding: '5%'}}>
+            <Button raised>
+            <Icon f7="plus_app"></Icon>
+              new space
+            </Button>
+            </div>
+              <BlockTitle>Spaces</BlockTitle>
               <List>
-                <ListItem link="/left-page-1/" title="Left Page 1"/>
+                <ListItem link="/left-page-1/" title="notes">
+                <Icon slot="media"  f7="house"></Icon>
+                </ListItem>
                 <ListItem link="/left-page-2/" title="Left Page 2"/>
               </List>
               <BlockTitle>Control Main View</BlockTitle>
@@ -147,7 +156,7 @@ const MyApp = () => {
             <List>
               <ListButton title="Sign In" onClick={() => alertLoginData()} />
               <BlockFooter>
-                Some text about login information.<br />Click "Sign In" to close Login Screen
+                Some text about login information.<br />Click Sign In to close Login Screen
               </BlockFooter>
             </List>
           </Page>

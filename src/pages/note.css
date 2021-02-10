@@ -1,0 +1,11 @@
+.for-toolbar {
+    display: block !important;
+}
+
+.for-container {
+    height: 100%;
+}
+
+.list ul {
+    background: transparent !important;
+}

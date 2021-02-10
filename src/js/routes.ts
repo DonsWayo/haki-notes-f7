@@ -8,11 +8,21 @@ import LeftPage2 from '../pages/left-page-2';
 import DynamicRoutePage from '../pages/dynamic-route';
 import RequestAndLoad from '../pages/request-and-load';
 import NotFoundPage from '../pages/404';
+import NotePage from '../pages/note';
+import IntroSlider from '../pages/intro-slider';
 
 const routes = [
   {
     path: '/',
     component: HomePage,
+  },
+  {
+    path: '/note',
+    component: NotePage,
+  },
+  {
+    path: '/intro',
+    component: IntroSlider,
   },
   {
     path: '/about/',

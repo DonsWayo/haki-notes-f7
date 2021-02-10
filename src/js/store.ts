@@ -3,32 +3,64 @@ import { createStore } from 'framework7/lite';
 
 const store = createStore({
   state: {
-    products: [
-      {
-        id: '1',
-        title: 'Apple iPhone 8',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.'
-      },
-      {
-        id: '2',
-        title: 'Apple iPhone 8 Plus',
-        description: 'Velit odit autem modi saepe ratione totam minus, aperiam, labore quia provident temporibus quasi est ut aliquid blanditiis beatae suscipit odio vel! Nostrum porro sunt sint eveniet maiores, dolorem itaque!'
-      },
-      {
-        id: '3',
-        title: 'Apple iPhone X',
-        description: 'Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.'
-      },
-    ]
+    notes: [ 
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña" , date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'},
+      { title: "title", content: "lorem impus locl fari sutyd jsds loco loco para la montaña", date: '17:14'}
+    ],
+    currentSpace: "Notes",
+    loadingNotes: true,
+    loadingSpaces: true,
+    largeScreen: false,
+    openNote: false
   },
   getters: {
-    products({ state }) {
-      return state.products;
+    notes({ state }) {
+      console.log('getNotes')
+      return state.notes;
+    },
+    largeScreen({ state }) {
+      return state.largeScreen;
+    },
+    openNote({ state }) {
+      return state.openNote;
     }
   },
   actions: {
-    addProduct({ state }, product) {
+    addNote({ state }, product) {
       state.products = [...state.products, product];
+    },
+    getNotes({ state }) {
+      const notes = []
+      state.products = notes;
+    },
+    setLargeScreen({ state }, screen) {
+      state.largeScreen = screen;
+    },
+    setOpenNote({ state }, openNote) {
+      state.openNote = openNote;
     },
   },
 })

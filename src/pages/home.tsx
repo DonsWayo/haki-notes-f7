@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Page,
   Navbar,
@@ -14,79 +14,109 @@ import {
   ListItem,
   Row,
   Col,
-  Button
+  Button,
+  Subnavbar,
+  Searchbar,
+  theme,
+  useStore,
+  Fab,
+  Icon,
+  Popup
 } from 'framework7-react';
+import NotesList from '../components/notes-list';
+import { useWindowDimensions } from '../hooks/useWindowDimensions';
+import store from '../js/store';
+import NotePage from './note';
+import ComposeLarge from '../components/compose-large';
 
-const HomePage = () => (
-  <Page name="home">
-    {/* Top Navbar */}
-    <Navbar large sliding={false}>
-      <NavLeft>
-        <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="left" />
-      </NavLeft>
-      <NavTitle sliding>HakiNotes</NavTitle>
-      <NavRight>
-        <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="right" />
-      </NavRight>
-      <NavTitleLarge>HakiNotes</NavTitleLarge>
-    </Navbar>
-    {/* Toolbar */}
-    <Toolbar bottom>
-      <Link>Left Link</Link>
-      <Link>Right Link</Link>
-    </Toolbar>
-    {/* Page content */}
-    <Block strong>
-      <p>This is an example of split view application layout, commonly used on tablets. The main approach of such kind of layout is that you can see different views at the same time.</p>
+const HomePage = () => {
+  const { width } = useWindowDimensions();
+  const largeScreen = useStore('largeScreen');
+  const openNote = useStore('openNote');
 
-      <p>Each view may have different layout, different navbar type (dynamic, fixed or static) or without navbar.</p>
+  useEffect(() => {
+    if (width > 600 && !largeScreen) {
+      store.dispatch('setLargeScreen', true);
+    } else if (width < 600 && largeScreen) {
+      store.dispatch('setLargeScreen', false);
+    }
+  }, [width])
 
-      <p>The fun thing is that you can easily control one view from another without any line of JavaScript just using "data-view" attribute on links.</p>
-    </Block>
-    <BlockTitle>Navigation</BlockTitle>
-    <List>
-      <ListItem link="/about/" title="About"/>
-      <ListItem link="/form/" title="Form"/>
-    </List>
 
-    <BlockTitle>Modals</BlockTitle>
-    <Block strong>
-      <Row>
-        <Col width="50">
-          <Button fill raised popupOpen="#my-popup">Popup</Button>
-        </Col>
-        <Col width="50">
-          <Button fill raised loginScreenOpen="#my-login-screen">Login Screen</Button>
-        </Col>
-      </Row>
-    </Block>
+  function renderSmall() {
+    return (
+      <Page name="home" >
+        <Navbar large sliding={false}>
+          <NavLeft>
+            <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="left" />
+          </NavLeft>
+          <NavTitle sliding>HakiNotes</NavTitle>
+          <NavTitleLarge>HakiNotes</NavTitleLarge>
+          <Subnavbar inner={false}>
+            <Searchbar
+              searchContainer=".search-list"
+              searchIn=".item-title"
+              disableButton={!theme.aurora}
+            ></Searchbar>
+          </Subnavbar>
+        </Navbar>
+        <NotesList style={{ margin: 0 }} />
+        <Popup
+          className="demo-popup"
+          opened={openNote}
+          swipeToClose
+          swipeHandler=".swipe-handler"
+          onPopupClosed={() => store.dispatch('setOpenNote', false)}
+        >
+          <NotePage />
+        </Popup>
+        <Fab position="right-bottom" slot="fixed" text="Create" color="red" onClick={() => store.dispatch('setOpenNote', true)}>
+          <Icon ios="f7:plus" aurora="f7:plus" md="material:add"></Icon>
+        </Fab>
+      </Page>
+    )
+  }
 
-    <BlockTitle>Panels</BlockTitle>
-    <Block strong>
-      <Row>
-        <Col width="50">
-          <Button fill raised panelOpen="left">Left Panel</Button>
-        </Col>
-        <Col width="50">
-          <Button fill raised panelOpen="right">Right Panel</Button>
-        </Col>
-      </Row>
-    </Block>
+  function renderBig() {
+    return (
+      <Page name="home" pageContent={false}>
+        <Row noGap>
+          <Col width="35">
+            <Navbar>
+              <NavLeft>
+                <Link iconIos="f7:menu" iconAurora="f7:menu" iconMd="material:menu" panelOpen="left" />
+              </NavLeft>
+              <NavTitle>HakiNotes</NavTitle>
+              <Subnavbar inner={false}>
+                <Searchbar
+                  searchContainer=".search-list"
+                  searchIn='.item-title, .item-text'
+                  disableButton={!theme.aurora}
+                ></Searchbar>
+              </Subnavbar>
+            </Navbar>
+            <NotesList style={{ height: '100vh', overflow: 'scroll' }} />
+          </Col>
+          <Col width="65">
+            <ComposeLarge />
+          </Col>
+        </Row>
+      </Page>
+    )
+  }
 
-    <List>
-      <ListItem
-        title="Dynamic (Component) Route"
-        link="/dynamic-route/blog/45/post/125/?foo=bar#about"
-      />
-      <ListItem
-        title="Default Route (404)"
-        link="/load-something-that-doesnt-exist/"
-      />
-      <ListItem
-        title="Request Data & Load"
-        link="/request-and-load/user/123456/"
-      />
-    </List>
-  </Page>
-);
+
+  return (
+    <>
+      {/* Top Navbar */}
+
+
+      {largeScreen ?
+        renderBig()
+        :
+        renderSmall()
+      }
+    </>
+  )
+}
 export default HomePage;
